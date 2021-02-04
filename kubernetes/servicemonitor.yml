@@ -4,6 +4,7 @@ kind: ServiceMonitor
 metadata:
   labels:
     app: prometheus-data-generator
+    release: kube-prom
     prometheus: kube-prometheus
     # this label is needed in case of using default kube-prometheus-stack helm chart
     # so that prometheus picks this up

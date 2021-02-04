@@ -92,18 +92,27 @@ class PrometheusDataGenerator:
                     registry=self.registry
                 )
             elif metric["type"].lower() == "histogram":
-                # TODO add support to overwrite buckets
-                instrument = Histogram(
+                if metric["bucket_list"]:
+                    bucket_list=metric["bucket_list"]
+                    bucket_list.append('inf')
+                    bucket=tuple(float(x) for x in bucket_list)
+                    instrument = Histogram(
                     metric["name"],
                     metric["description"],
                     labels,
-                    registry=self.registry
-                )
+                    registry=self.registry,bucket=bucket
+                    )
+                else:
+                    instrument = Histogram(
+                        metric["name"],
+                        metric["description"],
+                        labels,
+                        registry=self.registry
+                    )
             else:
                 logger.warning(
                     "Unknown metric type {type} for metric {name}, ignoring.".format(**metric)
                 )
-
             t = threading.Thread(
                 target=self.update_metrics,
                 args=(instrument, metric)

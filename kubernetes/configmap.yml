@@ -44,3 +44,15 @@ data:
             labels:
               name: apple
               color: yellow
+      - name: number_of_vegetables
+        description: The number of fruits we have.
+        type: histogram
+        labels: [name, color]
+        sequence:
+          - time: 5
+            values: 0-20
+            operation: inc
+            labels:
+              name: potato
+              color: brown
+          - eval_time: 5
