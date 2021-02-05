@@ -95,12 +95,13 @@ class PrometheusDataGenerator:
                 if "bucket_list" in metric.keys():
                     bucket_list=metric["bucket_list"]
                     bucket_list.append('inf')
-                    bucket=tuple(float(x) for x in bucket_list)
+                    buckets=tuple(float(x) for x in bucket_list)
                     instrument = Histogram(
                     metric["name"],
                     metric["description"],
                     labels,
-                    registry=self.registry,bucket=bucket
+                    registry=self.registry,
+                    buckets=buckets
                     )
                 else:
                     instrument = Histogram(
