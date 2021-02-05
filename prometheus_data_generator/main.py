@@ -92,7 +92,7 @@ class PrometheusDataGenerator:
                     registry=self.registry
                 )
             elif metric["type"].lower() == "histogram":
-                if metric["bucket_list"]:
+                if "bucket_list" in metric.keys():
                     bucket_list=metric["bucket_list"]
                     bucket_list.append('inf')
                     bucket=tuple(float(x) for x in bucket_list)
