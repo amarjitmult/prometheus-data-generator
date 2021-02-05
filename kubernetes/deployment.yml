@@ -16,7 +16,7 @@ spec:
         app: prometheus-data-generator
     spec:
       containers:
-      - image: littleangryclouds/prometheus-data-generator:0.2
+      - image: registry.local:5000/prometheus-data-generator:0.6
         imagePullPolicy: IfNotPresent
         env:
         - name: PDG_CONFIG
